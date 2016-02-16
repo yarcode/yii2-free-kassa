@@ -1,0 +1,38 @@
+{
+  "name": "yarcode/yii2-free-kassa",
+  "description": "FreeKassa component for Yii2",
+  "type": "yii2-extension",
+  "license": "MIT",
+  "keywords": [
+    "yii2",
+    "billing",
+    "payment",
+    "freekassa",
+    "free-kassa",
+    "yii2-extension"
+  ],
+  "homepage": "http://yiidreamteam.com/yii2/free-kassa",
+  "authors": [
+    {
+      "name": "Valentin Konusov",
+      "email": "rlng-krsk@yandex.ru",
+      "homepage": "http://yiidreamteam.com/team/valentin",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/yarcode/yii2-free-kassa/issues",
+    "source": "https://github.com/yarcode/yii2-free-kassa"
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.4.0",
+    "yiisoft/yii2": "~2",
+    "guzzlehttp/guzzle": "~6"
+  },
+  "autoload": {
+    "psr-4": {
+      "yarcode\\freekassa\\": "./src"
+    }
+  }
+}
