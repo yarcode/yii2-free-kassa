@@ -3,7 +3,7 @@
  * @author Valentin Konusov <rlng-krsk@yandex.ru>
  *
  * @var \yii\web\View $this
- * @var \yarcode\freekassa\Api $api
+ * @var \yarcode\freekassa\Merchant $api
  * @var integer $invoiceId
  * @var float $amount
  * @var string $description

@@ -16,7 +16,7 @@ class RedirectForm extends Widget
 {
     public $message = 'Now you will be redirected to the payment system.';
 
-    /** @var Api FreeKassa API component */
+    /** @var Merchant FreeKassa API component */
     public $api;
     /** @var integer internal invoice ID */
     public $invoiceId;

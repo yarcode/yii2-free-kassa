@@ -5,7 +5,7 @@
 
 namespace yarcode\freekassa\actions;
 
-use yarcode\freekassa\Api;
+use yarcode\freekassa\Merchant;
 use yii\base\Action;
 use yii\base\InvalidConfigException;
 use yii\web\Response;
@@ -24,7 +24,7 @@ class ResultAction extends Action
 
     public $silent = false;
 
-    /** @var Api */
+    /** @var Merchant */
     private $api;
 
     /**
@@ -34,7 +34,7 @@ class ResultAction extends Action
     {
         $this->api = \Yii::$app->get($this->componentName);
 
-        if (!$this->api instanceof Api) {
+        if (!$this->api instanceof Merchant) {
             throw new InvalidConfigException('Invalid FreeKassa component configuration');
         }
 
@@ -57,7 +57,7 @@ class ResultAction extends Action
 
         if ($this->sendConfirmationResponse === true) {
             \Yii::$app->response->format = Response::FORMAT_RAW;
-            return Api::CONFIRMATION_RESPONSE_TEXT;
+            return Merchant::CONFIRMATION_RESPONSE_TEXT;
         }
 
         if (isset($this->redirectUrl)) {
