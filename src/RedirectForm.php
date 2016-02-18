@@ -63,6 +63,7 @@ class RedirectForm extends Widget
             'description' => $this->description,
             'language' => $this->language,
             'currency' => $this->currency,
+            'email' => $this->email
         ]);
     }
 }

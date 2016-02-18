@@ -36,12 +36,13 @@ Configure `freeKassa` component in the `components` section of your application.
 To redirect user to PerfectMoney site you need to create the page with RedirectForm widget.
 User will redirected right after page load.
 
-    <?php echo \yarcode\freekassa\RedirectForm::widget([
+    <?= \yarcode\freekassa\RedirectForm::widget([
         'message' => 'Redirecting to payment gateway...',
         'api' => Yii::$app->get('freeKassa'),
         'invoiceId' => $invoice->id,
         'amount' => $invoice->amount,
         'description' => $invoice->description,
+        'email' => $invoice->owner->email
     ]); ?>
 
 ### Gateway controller ###
