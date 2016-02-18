@@ -23,8 +23,12 @@ to the `require` section of your composer.json.
 Configure `freeKassa` component in the `components` section of your application.
 
     'freeKassa' => [
-        'class' => '\yarcode\freekassa\Api',
-        
+        'class' => '\yarcode\freekassa\Merchant',
+        'merchantId' => 'YOUR_MERCHANT_ID',
+        'merchantFormSecret' => 'SECRET_1',
+        'checkDataSecret' => 'SECRET_2',
+        'defaultCurrency' => 'DEFAULT_CURRENCY_ID',
+        'defaultLanguage' => 'ru' // or 'en' 
     ],
     
 ### Redirecting to the payment system ###

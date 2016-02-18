@@ -24,57 +24,60 @@ class Merchant extends Component
 
     const CONFIRMATION_RESPONSE_TEXT = 'YES';
 
-    const CURRENCY_MEGAFON_CENTRAL_BRANCH = "143";
-    const CURRENCY_QIWI_RUB = "63";
-    const CURRENCY_QIWI_USD = "123";
-    const CURRENCY_YANDEX_MONEY = "45";
-    const CURRENCY_DEBIT_CART_RUB = "94";
-    const CURRENCY_DEBIT_CART_USD = "100";
-    const CURRENCY_DEBIT_CART_EUR = "124";
-    const CURRENCY_BITCOIN = "116";
-    const CURRENCY_FK_WALLET_RUB = "133";
-    const CURRENCY_OOOPAY_USD = "87";
-    const CURRENCY_OOOPAY_RUR = "106";
-    const CURRENCY_OOOPAY_EUR = "109";
-    const CURRENCY_WMZ_BILL = "131";
-    const CURRENCY_WMR_BILL = "130";
-    const CURRENCY_WEB_MONEY_WMR = "1";
-    const CURRENCY_WEB_MONEY_WMZ = "2";
-    const CURRENCY_WEB_MONEY_WME = "3";
-    const CURRENCY_TINKOFF_CREDIT_SYSTEMS = "112";
-    const CURRENCY_W1_RUR = "74";
-    const CURRENCY_PAYEER_RUB = "114";
-    const CURRENCY_PAYEER_USD = "115";
-    const CURRENCY_PERFECT_MONEY_USD = "64";
-    const CURRENCY_PERFECT_MONEY_EUR = "69";
-    const CURRENCY_OKPAY_USD = "62";
-    const CURRENCY_OKPAY_RUB = "60";
-    const CURRENCY_OKPAY_EUR = "61";
-    const CURRENCY_Z_PAYMENT = "102";
-    const CURRENCY_ALFA_BANK_RUR = "79";
-    const CURRENCY_VTB24_RUR = "81";
-    const CURRENCY_PROMSVYAZ_BANK = "110";
-    const CURRENCY_RUSSKIJ_STANDART_BANK = "113";
-    const CURRENCY_MOBILE_PAYMENT_MTS = "84";
-    const CURRENCY_MOBILE_PAYMENT_BEELINE = "83";
-    const CURRENCY_TERMINAL_RUSSIA = "99";
-    const CURRENCY_SALON_SVYAZI = "118";
-    const CURRENCY_MONEY_TRANSFER = "117";
-    const CURRENCY_LAND_CREDIT = "96";
-    const CURRENCY_MY_KASSA_RUR = "125";
-    const CURRENCY_MOBILE_PAYMENT_MEGAFON_SEVERO_ZAPAD = "137";
-    const CURRENCY_MOBILE_PAYMENT_MEGAFON_SIBERIA = "138";
-    const CURRENCY_MOBILE_PAYMENT_MEGAFON_KAVKAZ = "139";
-    const CURRENCY_MOBILE_PAYMENT_MEGAFON_POVOLOJIE = "140";
-    const CURRENCY_MOBILE_PAYMENT_MEGAFON_URAL = "141";
-    const CURRENCY_MOBILE_PAYMENT_MEGAFON_DALNIJ_VOSTOK = "142";
+    const CURRENCY_MEGAFON_CENTRAL_BRANCH = 143;
+    const CURRENCY_QIWI_RUB = 63;
+    const CURRENCY_QIWI_USD = 123;
+    const CURRENCY_YANDEX_MONEY = 45;
+    const CURRENCY_DEBIT_CART_RUB = 94;
+    const CURRENCY_DEBIT_CART_USD = 100;
+    const CURRENCY_DEBIT_CART_EUR = 124;
+    const CURRENCY_BITCOIN = 116;
+    const CURRENCY_FK_WALLET_RUB = 133;
+    const CURRENCY_OOOPAY_USD = 87;
+    const CURRENCY_OOOPAY_RUR = 106;
+    const CURRENCY_OOOPAY_EUR = 109;
+    const CURRENCY_WMZ_BILL = 131;
+    const CURRENCY_WMR_BILL = 130;
+    const CURRENCY_WEB_MONEY_WMR = 1;
+    const CURRENCY_WEB_MONEY_WMZ = 2;
+    const CURRENCY_WEB_MONEY_WME = 3;
+    const CURRENCY_TINKOFF_CREDIT_SYSTEMS = 112;
+    const CURRENCY_W1_RUR = 74;
+    const CURRENCY_PAYEER_RUB = 114;
+    const CURRENCY_PAYEER_USD = 115;
+    const CURRENCY_PERFECT_MONEY_USD = 64;
+    const CURRENCY_PERFECT_MONEY_EUR = 69;
+    const CURRENCY_OKPAY_USD = 62;
+    const CURRENCY_OKPAY_RUB = 60;
+    const CURRENCY_OKPAY_EUR = 61;
+    const CURRENCY_Z_PAYMENT = 102;
+    const CURRENCY_ALFA_BANK_RUR = 79;
+    const CURRENCY_VTB24_RUR = 81;
+    const CURRENCY_PROMSVYAZ_BANK = 110;
+    const CURRENCY_RUSSKIJ_STANDART_BANK = 113;
+    const CURRENCY_MOBILE_PAYMENT_MTS = 84;
+    const CURRENCY_MOBILE_PAYMENT_BEELINE = 83;
+    const CURRENCY_TERMINAL_RUSSIA = 99;
+    const CURRENCY_SALON_SVYAZI = 118;
+    const CURRENCY_MONEY_TRANSFER = 117;
+    const CURRENCY_LAND_CREDIT = 96;
+    const CURRENCY_MY_KASSA_RUR = 125;
+    const CURRENCY_MOBILE_PAYMENT_MEGAFON_SEVERO_ZAPAD = 137;
+    const CURRENCY_MOBILE_PAYMENT_MEGAFON_SIBERIA = 138;
+    const CURRENCY_MOBILE_PAYMENT_MEGAFON_KAVKAZ = 139;
+    const CURRENCY_MOBILE_PAYMENT_MEGAFON_POVOLOJIE = 140;
+    const CURRENCY_MOBILE_PAYMENT_MEGAFON_URAL = 141;
+    const CURRENCY_MOBILE_PAYMENT_MEGAFON_DALNIJ_VOSTOK = 142;
 
     /** @var string Merchant ID */
     public $merchantId;
 
     /** @var string Default interface language, possible values - ru / en */
     public $defaultLanguage = 'ru';
-
+    
+    /** @var integer Default currencyID, use only FreeKassa IDs */
+    public $defaultCurrency;
+    
     /**
      * Array of Free Kassa servers IPs
      * Set to null, if you want to prevent IP check
@@ -99,8 +102,7 @@ class Merchant extends Component
         assert(isset($this->merchantId));
         assert(isset($this->merchantFormSecret));
         assert(isset($this->checkDataSecret));
-        assert(isset($this->alternateSecret));
-        assert(isset($this->merchantName));
+        assert(isset($this->defaultCurrency));
     }
 
     /**
@@ -243,16 +245,16 @@ class Merchant extends Component
      * Withdraw money to one of specified in merchant admin section wallets
      * For more info see: http://www.free-kassa.ru/docs/api.php#api_payment
      *
-     * @param string $currencyId
+     * @param integer $walletType
      * Possible values: ooopay, yandex, qiwi, payeer, card (VISA/MASTERCARD),
      * wmr, wmz, w1, fkw (Free-kassa Wallet)
      * @param float $amount
      * @return array|bool Array with keys: desc, PaymentId
      */
-    public function withdraw($currencyId, $amount)
+    public function withdraw($walletType, $amount)
     {
         return $this->call('payment', [
-            'currency' => $currencyId,
+            'currency' => $walletType,
             'amount' => static::formatAmount($amount)
         ]);
     }

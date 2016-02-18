@@ -16,6 +16,9 @@ class RedirectForm extends Widget
 {
     public $message = 'Now you will be redirected to the payment system.';
 
+    /** @var string View file name / path, you can specify your own */
+    public $viewFile = 'redirect';
+
     /** @var Merchant FreeKassa API component */
     public $api;
     /** @var integer internal invoice ID */
@@ -24,6 +27,12 @@ class RedirectForm extends Widget
     public $amount;
     /** @var string description for payment system */
     public $description = '';
+    /** @var string Client email */
+    public $email;
+    /** @var string Default UI language for payment interface */
+    public $language;
+    /** @var integer Suggested currency */
+    public $currency;
 
     /**
      * @inheritdoc
@@ -35,6 +44,10 @@ class RedirectForm extends Widget
         assert(isset($this->api));
         assert(isset($this->invoiceId));
         assert(isset($this->amount));
+        assert(isset($this->email));
+
+        $this->language = $this->language ?: $this->api->defaultLanguage;
+        $this->currency = $this->currency ?: $this->api->defaultCurrency;
     }
 
     /**
@@ -42,14 +55,14 @@ class RedirectForm extends Widget
      */
     public function run()
     {
-        $this->view->registerJs("$('#free-kassa-checkout-form').submit();", View::POS_READY);
-
-        return $this->render('redirect', [
+        return $this->render($this->viewFile, [
             'message' => $this->message,
             'api' => $this->api,
             'invoiceId' => $this->invoiceId,
             'amount' => number_format($this->amount, 2, '.', ''),
             'description' => $this->description,
+            'language' => $this->language,
+            'currency' => $this->currency,
         ]);
     }
 }
