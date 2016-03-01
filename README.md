@@ -72,7 +72,7 @@ Sample controller code:
         {
             parent::init();
             /** @var Api $pm */
-            $freeKassa = \Yii::$app->get($this-$this->componentName);
+            $freeKassa = \Yii::$app->get($this->componentName);
             $freeKassa->on(GatewayEvent::EVENT_PAYMENT_REQUEST, [$this, 'handlePaymentRequest']);
             $freeKassa->on(GatewayEvent::EVENT_PAYMENT_SUCCESS, [$this, 'handlePaymentSuccess']);
         }
