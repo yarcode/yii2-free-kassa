@@ -9,6 +9,7 @@
  * @var string $description
  * @var string $email
  * @var string $language
+ * @var string $currency
  */
 
 $this->registerJs("$('#free-kassa-checkout-form').submit();", $this::POS_READY);
@@ -22,7 +23,9 @@ $this->registerJs("$('#free-kassa-checkout-form').submit();", $this::POS_READY);
         <?= \yii\helpers\Html::hiddenInput('oa', $amount) ?>
         <?= \yii\helpers\Html::hiddenInput('o', $invoiceId) ?>
         <?= \yii\helpers\Html::hiddenInput('s', $api->generateMerchantFormSign($amount, $invoiceId)) ?>
-        <?= \yii\helpers\Html::hiddenInput('i', $api->defaultCurrency) ?>
+        <?php if(null !== $currency): ?>
+            <?= \yii\helpers\Html::hiddenInput('i', $currency) ?>
+        <?php endif ?>
         <?= \yii\helpers\Html::hiddenInput('em', $email) ?>
         <?= \yii\helpers\Html::hiddenInput('lang', $language) ?>
     </form>

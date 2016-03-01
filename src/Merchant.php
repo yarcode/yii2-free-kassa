@@ -75,7 +75,9 @@ class Merchant extends Component
     /** @var string Default interface language, possible values - ru / en */
     public $defaultLanguage = 'ru';
     
-    /** @var integer Default currencyID, use only FreeKassa IDs */
+    /**
+     * @var integer Default suggested currencyID, use only FreeKassa IDs
+     */
     public $defaultCurrency;
     
     /**
@@ -102,7 +104,6 @@ class Merchant extends Component
         assert(isset($this->merchantId));
         assert(isset($this->merchantFormSecret));
         assert(isset($this->checkDataSecret));
-        assert(isset($this->defaultCurrency));
     }
 
     /**
