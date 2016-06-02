@@ -368,7 +368,7 @@ class Merchant extends Component
 
         $params = [
             $this->merchantId,
-            static::formatAmount($data['AMOUNT']),
+            $data['AMOUNT'],
             $this->checkDataSecret,
             $data['MERCHANT_ORDER_ID']
         ];
