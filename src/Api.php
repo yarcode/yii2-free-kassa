@@ -16,7 +16,7 @@ use yii\helpers\Json;
  */
 class Api extends Component
 {
-    const BASE_API_URL = "http://wallet.free-kassa.ru/api_v1.php";
+    const BASE_API_URL = "https://wallet.free-kassa.ru/api_v1.php";
 
     /** @var string Merchant ID */
     public $merchantId;
@@ -43,7 +43,7 @@ class Api extends Component
     {
         if (null === $this->httpClient) {
             $this->httpClient = new Client([
-                'base_url' => static::BASE_API_URL
+                'base_uri' => static::BASE_API_URL
             ]);
         }
 
