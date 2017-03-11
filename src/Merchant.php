@@ -166,7 +166,7 @@ class Merchant extends Component
     {
         if (null === $this->httpClient) {
             $this->httpClient = new Client([
-                'base_url' => static::BASE_API_URL
+                'base_uri' => static::BASE_API_URL
             ]);
         }
 
@@ -204,7 +204,7 @@ class Merchant extends Component
             'query' => ArrayHelper::merge($defaults, $params)
         ]);
 
-        return static::xmlToArray($result->xml());
+        return static::xmlToArray(simplexml_load_string($result->getBody()));
     }
 
     /**
