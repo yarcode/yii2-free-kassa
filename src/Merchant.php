@@ -85,7 +85,7 @@ class Merchant extends Component
      * Set to null, if you want to prevent IP check
      * @var array
      */
-    public $systemIPs = ['136.243.38.147', '136.243.38.149', '136.243.38.150', '136.243.38.151', '136.243.38.189'];
+    public $systemIPs = ['136.243.38.147', '136.243.38.149', '136.243.38.150', '136.243.38.151', '136.243.38.189', '88.198.88.98', '136.243.38.108'];
 
     /** @var string used for creating the hash to send merchant form (in API doc see 'secret1') */
     public $merchantFormSecret;
