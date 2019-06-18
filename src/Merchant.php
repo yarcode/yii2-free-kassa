@@ -93,6 +93,18 @@ class Merchant extends Component
     /** @var string used for creating the hash to check the data (in API doc see 'secret2') */
     public $checkDataSecret;
 
+    /**
+     * Name of property to testing
+     * @var string
+     */
+    public $testInitName = 'intid';
+
+    /**
+     * Value to define test request
+     * @var string
+     */
+    public $testInitValue = 'TEST_ORDER';
+
     /** @var Client */
     protected $httpClient;
 
@@ -294,6 +306,10 @@ class Merchant extends Component
             throw new ForbiddenHttpException('Hash error');
         }
 
+        if($this->isTestId($data)){
+            return true;
+        }
+
         $event = new GatewayEvent(['gatewayData' => $data]);
 
         $this->trigger(GatewayEvent::EVENT_PAYMENT_REQUEST, $event);
@@ -381,6 +397,17 @@ class Merchant extends Component
 
         \Yii::error('Hash check failed: ' . VarDumper::dumpAsString($params), 'FreeKassa');
         return false;
+    }
+
+    /**
+     * Return result of check testing property
+     *
+     * @param array $data
+     * @return bool
+     */
+    public function isTestId($data)
+    {
+        return $data[$this->testInitName] === $this->testInitValue;
     }
 
     /**
